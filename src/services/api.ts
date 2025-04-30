@@ -17,7 +17,7 @@ const mockDoctors = [
     isAvailableNow: true,
     hospitalName: "Apollo Hospital, Chennai",
     specializations: ["General Health Problems", "Chronic Disease Management", "Preventive Healthcare"],
-    image: "https://www.apollo247.com/images/doctors/doctors.png",
+    image: "/lovable-uploads/1748ab25-4b35-452e-a51b-7c748e51969e.png",
     gender: "male",
     availability: ["available_today", "available_tomorrow", "next_3_days"]
   },
@@ -34,7 +34,7 @@ const mockDoctors = [
     isAvailableNow: false,
     hospitalName: "Apollo Clinic, Bangalore",
     specializations: ["Women's Health", "Diabetes Management", "Thyroid Disorders"],
-    image: "https://www.apollo247.com/images/doctors/doctors.png",
+    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=500",
     gender: "female",
     availability: ["available_tomorrow", "next_3_days"]
   },
@@ -51,7 +51,7 @@ const mockDoctors = [
     isAvailableNow: true,
     hospitalName: "Apollo Hospital, Mumbai",
     specializations: ["Cardiac Health", "Hypertension Management", "Critical Care"],
-    image: "https://www.apollo247.com/images/doctors/doctors.png",
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=500",
     gender: "male",
     availability: ["available_today", "available_tomorrow"]
   },
@@ -68,7 +68,7 @@ const mockDoctors = [
     isAvailableNow: false,
     hospitalName: "Apollo Clinic, Hyderabad",
     specializations: ["Infectious Diseases", "Tropical Medicine", "Geriatric Care"],
-    image: "https://www.apollo247.com/images/doctors/doctors.png",
+    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=500",
     gender: "female",
     availability: ["next_3_days"]
   },
@@ -85,7 +85,7 @@ const mockDoctors = [
     isAvailableNow: true,
     hospitalName: "Apollo Hospital, Delhi",
     specializations: ["Respiratory Disorders", "Allergy Management", "Sleep Medicine"],
-    image: "https://www.apollo247.com/images/doctors/doctors.png",
+    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=500",
     gender: "male",
     availability: ["available_today"]
   },
@@ -102,7 +102,7 @@ const mockDoctors = [
     isAvailableNow: false,
     hospitalName: "Apollo Clinic, Kolkata",
     specializations: ["Family Medicine", "Child Health", "Preventive Healthcare"],
-    image: "https://www.apollo247.com/images/doctors/doctors.png",
+    image: "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&q=80&w=500",
     gender: "female",
     availability: ["available_tomorrow", "next_3_days"]
   },
@@ -119,7 +119,7 @@ const mockDoctors = [
     isAvailableNow: true,
     hospitalName: "Apollo Hospital, Cochin",
     specializations: ["Diabetes Management", "Metabolic Disorders", "Obesity"],
-    image: "https://www.apollo247.com/images/doctors/doctors.png",
+    image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=500",
     gender: "male",
     availability: ["available_today", "available_tomorrow"]
   },
@@ -136,7 +136,7 @@ const mockDoctors = [
     isAvailableNow: false,
     hospitalName: "Apollo Clinic, Pune",
     specializations: ["Women's Health", "Thyroid Disorders", "Anemia"],
-    image: "https://www.apollo247.com/images/doctors/doctors.png",
+    image: "https://images.unsplash.com/photo-1591604021695-0c69b7c05981?auto=format&fit=crop&q=80&w=500",
     gender: "female",
     availability: ["next_3_days"]
   },
@@ -153,7 +153,7 @@ const mockDoctors = [
     isAvailableNow: true,
     hospitalName: "Apollo Hospital, Ahmedabad",
     specializations: ["Digestive Disorders", "Liver Diseases", "Nutrition"],
-    image: "https://www.apollo247.com/images/doctors/doctors.png",
+    image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=500",
     gender: "male",
     availability: ["available_today"]
   },
@@ -170,7 +170,7 @@ const mockDoctors = [
     isAvailableNow: false,
     hospitalName: "Apollo Clinic, Chennai",
     specializations: ["Geriatric Care", "Hypertension", "Diabetes"],
-    image: "https://www.apollo247.com/images/doctors/doctors.png",
+    image: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&q=80&w=500",
     gender: "female",
     availability: ["available_tomorrow", "next_3_days"]
   }
@@ -180,12 +180,12 @@ const mockDoctors = [
 const filterDoctors = (doctors, filters) => {
   return doctors.filter(doctor => {
     // Gender filter
-    if (filters.gender.length > 0 && !filters.gender.includes(doctor.gender)) {
+    if (filters.gender && filters.gender.length > 0 && !filters.gender.includes(doctor.gender)) {
       return false;
     }
     
     // Experience filter
-    if (filters.experience.length > 0) {
+    if (filters.experience && filters.experience.length > 0) {
       const doctorExp = parseInt(doctor.experience);
       let matchesExp = false;
       
@@ -205,7 +205,7 @@ const filterDoctors = (doctors, filters) => {
     }
     
     // Availability filter
-    if (filters.availability.length > 0) {
+    if (filters.availability && filters.availability.length > 0) {
       let matchesAvail = false;
       for (const avail of filters.availability) {
         if (doctor.availability.includes(avail)) {
@@ -219,7 +219,7 @@ const filterDoctors = (doctors, filters) => {
     }
     
     // Fee filter
-    if (filters.fee.length > 0) {
+    if (filters.fee && filters.fee.length > 0) {
       let matchesFee = false;
       for (const feeRange of filters.fee) {
         if (feeRange === "0-500" && doctor.fee <= 500) {
@@ -236,7 +236,7 @@ const filterDoctors = (doctors, filters) => {
     }
     
     // Language filter
-    if (filters.language.length > 0) {
+    if (filters.language && filters.language.length > 0) {
       let matchesLanguage = false;
       for (const lang of filters.language) {
         if (doctor.languages.map(l => l.toLowerCase()).includes(lang)) {
@@ -290,7 +290,8 @@ export const fetchDoctors = async (page = 1, filters = {}) => {
   let filtered = filterDoctors(mockDoctors, filters);
   
   // Apply sorting
-  filtered = sortDoctors(filtered, filters.sort || "relevance");
+  const sortOption = filters.sort || "relevance";
+  filtered = sortDoctors(filtered, sortOption);
   
   // Calculate pagination
   const doctorsPerPage = 10;

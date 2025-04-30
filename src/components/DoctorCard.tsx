@@ -2,6 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export const DoctorCard = ({ doctor }) => {
   return (
@@ -9,11 +10,16 @@ export const DoctorCard = ({ doctor }) => {
       <div className="flex flex-col md:flex-row">
         <div className="md:w-1/4 mb-4 md:mb-0 flex flex-col items-center md:items-start">
           <div className="relative">
-            <img 
-              src={doctor.image || "https://www.apollo247.com/images/doctors/doctors.png"} 
-              alt={doctor.name}
-              className="w-28 h-28 object-cover rounded-full border-2 border-apollo-secondary"
-            />
+            <Avatar className="w-28 h-28 border-2 border-apollo-secondary">
+              <AvatarImage 
+                src={doctor.image} 
+                alt={doctor.name}
+                className="object-cover"
+              />
+              <AvatarFallback className="bg-apollo-light text-apollo-primary text-xl">
+                {doctor.name.split(' ').map(n => n[0]).join('')}
+              </AvatarFallback>
+            </Avatar>
             {doctor.isAvailableNow && (
               <Badge className="absolute bottom-0 right-0 bg-green-500">Available Now</Badge>
             )}
@@ -22,10 +28,10 @@ export const DoctorCard = ({ doctor }) => {
           <div className="mt-3 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start mb-1">
               <span className="text-yellow-500 mr-1">★</span>
-              <span className="font-medium">{doctor.rating || "4.5"}</span>
-              <span className="text-gray-400 text-sm ml-1">({doctor.reviewCount || "120"})</span>
+              <span className="font-medium">{doctor.rating}</span>
+              <span className="text-gray-400 text-sm ml-1">({doctor.reviewCount})</span>
             </div>
-            <p className="text-sm text-gray-500">{doctor.experience || "10+ years"} exp</p>
+            <p className="text-sm text-gray-500">{doctor.experience} exp</p>
           </div>
         </div>
         
@@ -33,8 +39,8 @@ export const DoctorCard = ({ doctor }) => {
           <div className="flex flex-col md:flex-row justify-between">
             <div>
               <h3 className="text-xl font-bold text-apollo-primary">{doctor.name}</h3>
-              <p className="text-gray-600">{doctor.specialty || "General Physician & Internal Medicine"}</p>
-              <p className="text-sm text-gray-500 mb-2">{doctor.qualification || "MBBS, MD"}</p>
+              <p className="text-gray-600">{doctor.specialty}</p>
+              <p className="text-sm text-gray-500 mb-2">{doctor.qualification}</p>
               
               <div className="flex flex-wrap gap-2 mb-3">
                 {doctor.languages && doctor.languages.map((lang, index) => (
@@ -42,17 +48,11 @@ export const DoctorCard = ({ doctor }) => {
                     {lang}
                   </Badge>
                 ))}
-                {!doctor.languages && (
-                  <>
-                    <Badge variant="outline" className="bg-apollo-light">English</Badge>
-                    <Badge variant="outline" className="bg-apollo-light">Hindi</Badge>
-                  </>
-                )}
               </div>
             </div>
             
             <div className="mt-2 md:mt-0 text-right">
-              <p className="font-bold text-apollo-primary text-lg">₹{doctor.fee || "500"}</p>
+              <p className="font-bold text-apollo-primary text-lg">₹{doctor.fee}</p>
               <p className="text-sm text-gray-500">Consultation Fee</p>
             </div>
           </div>
@@ -65,7 +65,7 @@ export const DoctorCard = ({ doctor }) => {
             )}
             
             <div className="text-sm text-gray-600 mb-3">
-              <span className="font-medium">Specializes in:</span> {doctor.specializations?.join(", ") || "General Health Problems, Fever, Cough, Cold, Headache"}
+              <span className="font-medium">Specializes in:</span> {doctor.specializations?.join(", ")}
             </div>
             
             <div className="flex flex-col sm:flex-row gap-3 mt-4">

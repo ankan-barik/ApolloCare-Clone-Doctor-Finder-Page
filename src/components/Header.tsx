@@ -12,9 +12,9 @@ export const Header = () => {
           <div className="flex items-center">
             <a href="/" className="flex items-center">
               <img 
-                src="https://www.apollo247.com/images/apollo247.png" 
-                alt="Apollo Doctor"
-                className="h-8"
+                src="/lovable-uploads/1748ab25-4b35-452e-a51b-7c748e51969e.png" 
+                alt="Apollo 247"
+                className="h-10"
               />
             </a>
           </div>
